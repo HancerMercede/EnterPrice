@@ -1,0 +1,61 @@
+﻿@page
+@model EnterPrice.Pages.BuildingModel
+@{
+    ViewData["Title"] = "Buildings";
+}
+<div class="container text-center">
+    <h1 class="card-title">@ViewData["Title"]</h1>
+    <h3 class="card-subtitle">List of all buildings.</h3>
+</div>
+<hr />
+<div class="container">
+    @if (Model.Buildings.Any() || Model.Buildings != null)
+    {
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        <label class="col-form-label">Numero</label>
+                    </th>
+                    <th>
+                        <label class="col-form-label">Dirección</label>
+                    </th>
+                    <th>
+                        <label class="col-form-label">Tipo de edificio</label>
+                    </th>
+                    <th>
+                        <label class="col-form-label">Calidad</label>
+                    </th>
+                    <th>
+                        <label class="col-form-label">Categoria</label>
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Buildings)
+                {
+                    <tr>
+                        <td>@item.Number</td>
+                        <td>@item.Address</td>
+                        <td>@item.Type</td>
+                        <td>@item.Cuality</td>
+                        <td>@item.Category</td>
+                        <td>
+                            <a class="btn btn-primary" asp-asp-page="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a class="btn btn-success" asp-asp-page="Detail" asp-route-id="@item.Id">Details</a> |
+                            <a class="btn btn-danger" asp-asp-page="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+    </table>
+    <div class="text-center">
+        <p class="text-info">Records found <b>@Model.Amount</b></p>
+    </div>
+    }
+    else
+    {
+        <div class="text-center">  <p class="text-info">There are any record yet.</p></div>
+    }
+</div>

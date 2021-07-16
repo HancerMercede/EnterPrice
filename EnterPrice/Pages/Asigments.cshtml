@@ -1,0 +1,57 @@
+﻿@page
+@model EnterPrice.Pages.AsigmentsModel
+@{
+    ViewData["Title"] = "Asigments";
+}
+<div class="container text-center">
+    <h1 class="card-title">@ViewData["Title"]</h1>
+    <h3 class="card-subtitle">List of all asigments.</h3>
+</div>
+<hr />
+<div class="container">
+    @if (Model.Asigments.Any() || Model.Asigments != null)
+    {
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        <label class="col-form-label">No.Edificio</label>
+                    </th>
+                    <th>
+                        <label class="col-form-label">No.Trabajador</label>
+                    </th>
+                    <th>
+                        <label class="col-form-label">Fecha de inicio</label>
+                    </th>
+                    <th>
+                        <label class="col-form-label">Dias asignados</label>
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Asigments)
+                {
+                    <tr>
+                        <td>@item.Building.Number</td>
+                        <td>@item.Worker.Number</td>
+                        <td>@item.StartDate</td>
+                        <td>@item.Days</td>
+                        <td>
+                            <a class="btn btn-primary" asp-asp-page="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a class="btn btn-success" asp-asp-page="Detail" asp-route-id="@item.Id">Details</a> |
+                            <a class="btn btn-danger" asp-asp-page="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+    </table>
+    <div class="text-center">
+        <p class="text-info">Records found <b>@Model.Amount</b></p>
+    </div>
+    }
+    else
+    {
+        <div class="text-center">  <p class="text-info">There are any record yet.</p></div>
+    }
+</div>

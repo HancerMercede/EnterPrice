@@ -1,0 +1,82 @@
+﻿@page 
+@model WorkerPageModel
+@{
+    ViewData["Title"] = "Workers";
+}
+<div class="container text-center">
+    <h1 class="card-title">@ViewData["Title"]</h1>
+    <h3 class="card-subtitle">List of all workers.</h3>
+</div>
+<hr />
+
+<br />
+<div class="container">
+    @if (Model.workers.Any() || Model.workers != null)
+    {
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>
+                        <label class="col-form-label">Nombre</label>
+                    </th>
+                    <th>
+                        <label class="col-form-label">Salario</label>
+                    </th>
+                    <th>
+                        <label class="col-form-label">Supervisor</label>
+                    </th>
+                    <th>
+                        <label class="col-form-label">Numero</label>
+                    </th>
+                    <th>
+                        <label class="col-form-label">Ocupación</label>
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.workers)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td>@item.SalaryPerHour</td>
+                        <td>@item.SuperVisor.Number</td>
+                        <td>@item.Number</td>
+                        <td>@item.Job</td>
+                        <td>
+                            <a class="btn btn-primary" asp-asp-page="Edit" asp-route-id="@item.Id">Edit</a> |
+                            <a class="btn btn-success" asp-asp-page="Detail" asp-route-id="@item.Id">Details</a> |
+                            <a class="btn btn-danger" asp-asp-page="Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+    </table>
+    <div class="text-center">
+        <p class="text-info">Records found <b>@Model.Amount</b></p>
+    </div>
+    <div class="container">
+    <table class="table">
+    <thead>
+        <tr>
+             <th>
+                 <label class="col-form-label">Nombre de los trabajadores cuyo salario estan entre 10 y 12.</label>
+             </th>
+        </tr>
+    </thead>
+        <tbody>
+                @foreach(var item in Model.WorkerPerSalary)
+                {
+                   <tr>
+                       <td>@item.Name</td>
+                   </tr> 
+                }
+        </tbody>
+    </table>
+</div>
+    }
+    else
+    {
+        <div class="text-center">  <p class="text-info">There are any record yet.</p></div>
+    }
+</div>
